@@ -157,7 +157,7 @@ class Wp_Book {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'init', $plugin_admin, 'cust_post_type_book' ); // Action for custome post type Book
+		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_post_book' ); // Action for custom post type Book
 
 	}
 

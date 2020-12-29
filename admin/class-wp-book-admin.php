@@ -100,7 +100,7 @@ class Wp_Book_Admin {
 
 	}
 
-	public function cust_post_type_book() {
+	public function wpb_cust_post_book() {
 
 		/*
 		* This function will add custom post type named 'Book'.
