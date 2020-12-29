@@ -100,7 +100,7 @@ class Wp_Book_Admin {
 
 	}
 
-	public function cust_post_type_book() {
+	public function wpb_cust_post_book() {
 
 		/*
 		* This function will add custom post type named 'Book'.
@@ -137,11 +137,74 @@ class Wp_Book_Admin {
 			'rewrite'            	=> array( 'slug' => 'book' ),
       'capability_type'    	=> 'post',
 			'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail' ),
-      'taxonomies'         	=> array( 'category', 'post_tag' ),
+      //'taxonomies'         	=> array( 'category', 'post_tag' ),
 			'show_in_rest'       	=> true
 		);
 
 		register_post_type( 'book', $args );
+	}
+
+	public function wpb_cust_hie_taxonomy() {
+
+		/*
+		* This function adds custom hierarchical taxonomy named Book Category.
+		*/
+
+		$labels = array(
+			'name' 							=> _x( 'Book Categories', 'Taxonomy General Name' ),
+			'singular_name' 		=> _x( 'Book Category', 'Taxonomy Singular Name' ),
+			'search_items' 			=> __( 'Search For Book Category' ),
+			'all_items'         => __( 'All Book Categories' ),
+      'parent_item'       => __( 'Parent Book Category' ),
+      'parent_item_colon' => __( 'Parent Book Category:' ),
+      'edit_item'         => __( 'Edit Book Category' ),
+      'update_item'       => __( 'Update Book Category' ),
+      'add_new_item'      => __( 'Add New Book Category' ),
+      'new_item_name'     => __( 'New Book Category ' ),
+      'menu_name'         => __( 'Book Category' ),
+		);
+
+		$args = array(
+			'hierarchical'      => true,
+      'labels'            => $labels,
+      'show_ui'           => true,
+      'show_admin_column' => true,
+      'query_var'         => true,
+      'rewrite'           => [ 'slug' => 'book-category' ],
+		);
+
+		register_taxonomy( 'book-category', array( 'book' ), $args );
+	}
+
+	public function wpb_cust_nonhie_taxonomy() {
+
+		/*
+		* This function adds custom non-hierarchical taxonomy named Book Tag.
+		*/
+
+		$labels = array(
+			'name' 							=> _x( 'Book Tags', 'Taxonomy General Name' ),
+			'singular_name' 		=> _x( 'Book Tag', 'Taxonomy Singular Name' ),
+			'search_items' 			=> __( 'Search For Book Tag' ),
+			'all_items'         => __( 'All Book Tags' ),
+      'edit_item'         => __( 'Edit Book Tag' ),
+      'update_item'       => __( 'Update Book Tag' ),
+      'add_new_item'      => __( 'Add New Book Tag' ),
+      'new_item_name'     => __( 'New Book Tag' ),
+      'menu_name'         => __( 'Book Tags' ),
+		);
+
+		$args = array(
+			'hierarchical'      => false,
+      'labels'            => $labels,
+      'show_ui'           => true,
+      'show_admin_column' => true,
+      'query_var'         => true,
+      'rewrite'           => [ 'slug' => 'book-tag' ],
+		);
+
+		register_taxonomy( 'book-tag', array( 'book' ), $args );
+
 	}
 
 }
