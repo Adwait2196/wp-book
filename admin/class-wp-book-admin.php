@@ -100,19 +100,6 @@ class Wp_Book_Admin {
 
 	}
 
-	/**************************************************************
-	* This function will create table in the database with the prefix
-	**************************************************************/
-
-	public function bookmeta_integrate_wpdb() {
-		global $wpdb;
-
-		$wpdb->bookmeta = $wpdb->prefix . 'bookmeta';
-		$wpdb->tables[] = 'bookmeta';
-
-		return;
-	}
-
 	/****************************************************
 	* This function will add custom post type named 'Book'.
 	****************************************************/
@@ -217,6 +204,19 @@ class Wp_Book_Admin {
 		);
 
 		register_taxonomy( 'book-tag', array( 'book' ), $args );
+	}
+
+	/**************************************************************
+	* This function will create table in the database with the prefix
+	**************************************************************/
+
+	public function bookmeta_integrate_wpdb() {
+		global $wpdb;
+
+		$wpdb->bookmeta = $wpdb->prefix . 'bookmeta';
+		$wpdb->tables[] = 'bookmeta';
+
+		return;
 	}
 
 	/******************************************************

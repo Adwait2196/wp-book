@@ -158,7 +158,6 @@ class Wp_Book {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'init', $plugin_admin, 'bookmeta_integrate_wpdb', 0 ); // Action to add table to database
-		$this->loader->add_action( 'switch_blog', $plugin_admin, 'bookmeta_integrate_wpdb', 0);
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_post_book' ); // Action for custom post type Book
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_hie_taxonomy' ); // Action for custom hierarchical taxonomy
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_nonhie_taxonomy' ); // Action for custom non-hierarchical taxonomy
