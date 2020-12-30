@@ -160,6 +160,7 @@ class Wp_Book {
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_post_book' ); // Action for custom post type Book
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_hie_taxonomy' ); // Action for custom hierarchical taxonomy
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_nonhie_taxonomy' ); // Action for custom non-hierarchical taxonomy
+		$this->loader->add_action( 'add_meta_boxes_book', $plugin_admin, 'wpb_cust_meta_box' ); // Action for custom meta box
 
 	}
 

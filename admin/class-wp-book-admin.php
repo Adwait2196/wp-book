@@ -100,11 +100,11 @@ class Wp_Book_Admin {
 
 	}
 
-	public function wpb_cust_post_book() {
+	/****************************************************
+	* This function will add custom post type named 'Book'.
+	****************************************************/
 
-		/*
-		* This function will add custom post type named 'Book'.
-		*/
+	public function wpb_cust_post_book() {
 
 		$labels = array(
 			'name' 							 	=> _x( 'Books', 'Post Type General Name' ),
@@ -136,7 +136,7 @@ class Wp_Book_Admin {
 			'menu_position'				=> 6,
 			'rewrite'            	=> array( 'slug' => 'book' ),
       'capability_type'    	=> 'post',
-			'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail' ),
+			//'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail' ),
       //'taxonomies'         	=> array( 'category', 'post_tag' ),
 			'show_in_rest'       	=> true
 		);
@@ -144,11 +144,11 @@ class Wp_Book_Admin {
 		register_post_type( 'book', $args );
 	}
 
-	public function wpb_cust_hie_taxonomy() {
+	/********************************************************************
+	* This function adds custom hierarchical taxonomy named Book Category.
+	********************************************************************/
 
-		/*
-		* This function adds custom hierarchical taxonomy named Book Category.
-		*/
+	public function wpb_cust_hie_taxonomy() {
 
 		$labels = array(
 			'name' 							=> _x( 'Book Categories', 'Taxonomy General Name' ),
@@ -176,11 +176,11 @@ class Wp_Book_Admin {
 		register_taxonomy( 'book-category', array( 'book' ), $args );
 	}
 
-	public function wpb_cust_nonhie_taxonomy() {
+	/*******************************************************************
+	* This function adds custom non-hierarchical taxonomy named Book Tag.
+	*******************************************************************/
 
-		/*
-		* This function adds custom non-hierarchical taxonomy named Book Tag.
-		*/
+	public function wpb_cust_nonhie_taxonomy() {
 
 		$labels = array(
 			'name' 							=> _x( 'Book Tags', 'Taxonomy General Name' ),
@@ -204,7 +204,36 @@ class Wp_Book_Admin {
 		);
 
 		register_taxonomy( 'book-tag', array( 'book' ), $args );
+	}
 
+	/******************************************************
+	* These functions add custom meta box for posts type Book and it's content.
+	******************************************************/
+
+	public function wpb_cust_meta_box() {
+		add_meta_box( "wpb-meta-book",
+									"Book Details",
+									array( $this, "wpb_cust_meta_box_content" ),
+									"book",
+									"side",
+									"high" );
+	}
+
+	public function wpb_cust_meta_box_content( $post ) {
+		?>
+			<label for="meta_book_field1">Author Name : </label><br/>
+			<input name="meta_book_field1" id="meta_book_field1" type="text"/><br/>
+			<label for="meta_book_field2">Price : </label><br/>
+			<input name="meta_book_field2" id="meta_book_field2" type="text"/><br/>
+			<label for="meta_book_field3">Publisher : </label><br/>
+			<input name="meta_book_field3" id="meta_book_field3" type="text"/><br/>
+			<label for="meta_book_field4">Year : </label><br/>
+			<input name="meta_book_field4" id="meta_book_field4" type="text" maxlength="4"/><br/>
+			<label for="meta_book_field5">Edition : </label><br/>
+			<input name="meta_book_field5" id="meta_book_field5" type="text"/><br/>
+			<label for="meta_book_field6">URL : </label><br/>
+			<input name="meta_book_field6" id="meta_book_field6" type="text"/><br/>
+		<?php
 	}
 
 }
