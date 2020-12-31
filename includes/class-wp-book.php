@@ -163,6 +163,8 @@ class Wp_Book {
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_cust_nonhie_taxonomy' ); // Action for custom non-hierarchical taxonomy
 		$this->loader->add_action( 'add_meta_boxes_book', $plugin_admin, 'wpb_cust_meta_box' ); // Action for custom meta box
 		$this->loader->add_action( 'save_post_book', $plugin_admin, 'wpb_save_book_metabox_data', 10, 2 ); // Action to save meta box data to table
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wpb_cust_menu_page' ); // Action to create custom book menu
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'wpb_book_register_settings' ); // Action to register settings
 
 	}
 
