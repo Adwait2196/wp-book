@@ -315,6 +315,7 @@ class Wp_Book_Admin {
 	/***************************************************
 	* This function will register settings for books menu
 	***************************************************/
+
 	public function wpb_book_register_settings() {
 		register_setting( 'books-setting-group', 'currency' );
 		register_setting( 'books-setting-group', 'post-per-page' );
@@ -334,6 +335,50 @@ class Wp_Book_Admin {
 
 	public function wpb_book_post_pp() {
 		echo '<input type="text" name="post-per-page" value=""/>';
+	}
+
+	/*********************************************
+	* These functions is used to create a shortcode
+	*********************************************/
+	/*
+	public function wpb_book_shortcode( $atts ) {
+		$attributes = shortcode_atts( array(
+			'id' => '1',
+			'author_name' => 'Test',
+			'year' => '2020',
+			'category' => 'Test',
+			'tag' => 'Test',
+			'publisher' => 'Test'
+		), $atts );
+
+		$temp_value = get_book_meta( "33", "book_author_name" );
+		return $temp_value;
+	}
+
+	public function wpb_book_shortcode_caller() {
+		add_shortcode( 'BookSc', array( $this, 'wpb_book_shortcode' ) );
+	}
+	*/
+	/************************************************
+	*	This function is used to create dashboard widget
+	************************************************/
+
+	public function wpb_top_five_widget() {
+		wp_add_dashboard_widget( "top_five_book_widget",
+														 "Top 5 books",
+													 	 array( $this, "wpb_get_top_five_books" ) );
+	}
+
+	public function wpb_get_top_five_books() {
+		$args = [
+			'orderby' => 'count',
+			'order' => 'DESC',
+			'number' => 5,
+			'show_count' => 1,
+			'taxonomy' => 'book-category',
+			'style' => 'none',
+		];
+		wp_list_categories( $args );
 	}
 
 }
