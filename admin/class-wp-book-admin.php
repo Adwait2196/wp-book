@@ -100,19 +100,6 @@ class Wp_Book_Admin {
 
 	}
 
-	/**************************************************************
-	* This function will create table in the database with the prefix
-	**************************************************************/
-
-	public function bookmeta_integrate_wpdb() {
-		global $wpdb;
-
-		$wpdb->bookmeta = $wpdb->prefix . 'bookmeta';
-		$wpdb->tables[] = 'bookmeta';
-
-		return;
-	}
-
 	/****************************************************
 	* This function will add custom post type named 'Book'.
 	****************************************************/
@@ -219,6 +206,19 @@ class Wp_Book_Admin {
 		register_taxonomy( 'book-tag', array( 'book' ), $args );
 	}
 
+	/**************************************************************
+	* This function will create table in the database with the prefix
+	**************************************************************/
+
+	public function bookmeta_integrate_wpdb() {
+		global $wpdb;
+
+		$wpdb->bookmeta = $wpdb->prefix . 'bookmeta';
+		$wpdb->tables[] = 'bookmeta';
+
+		return;
+	}
+
 	/******************************************************
 	* These functions add custom meta box for posts type Book and it's content.
 	******************************************************/
@@ -298,6 +298,87 @@ class Wp_Book_Admin {
 			$auth_name = sanitize_text_field( $_POST[ 'ur_l' ] );
 			update_book_meta( $post_id, "book_url", $auth_name );
 		}
+	}
+
+	/********************************************************
+	* These functions will create menu page for books settings
+	********************************************************/
+
+	public function wpb_cust_menu_page() {
+		add_menu_page( 'WPT Book Menu', 'Books Menu', 'manage_options', 'book_menu', array( $this, 'wpb_create_book_menu_page' ) );
+	}
+
+	public function wpb_create_book_menu_page() {
+		require_once 'partials/wp-book-admin-display.php';
+	}
+
+	/***************************************************
+	* This function will register settings for books menu
+	***************************************************/
+
+	public function wpb_book_register_settings() {
+		register_setting( 'books-setting-group', 'currency' );
+		register_setting( 'books-setting-group', 'post-per-page' );
+		add_settings_section( 'books-setting-section', 'Books setting section', array( $this, 'wpb_book_settings_section' ), 'book_menu' );
+		add_settings_field( 'book-currency', 'Currency', array( $this, 'wpb_book_currency' ), 'book_menu', 'books-setting-section' );
+		add_settings_field( 'book-post-pp', 'Posts Per Page', array( $this, 'wpb_book_post_pp' ), 'book_menu', 'books-setting-section' );
+	}
+
+	public function wpb_book_settings_section() {}
+
+	public function wpb_book_currency() {
+		echo '<select name="currency" id="currency">
+						<option value="Dollar">$ - dollar</option>
+						<option value="Rupees">Rs. - rupees</option>
+					</select>';
+	}
+
+	public function wpb_book_post_pp() {
+		echo '<input type="text" name="post-per-page" value=""/>';
+	}
+
+	/*********************************************
+	* These functions is used to create a shortcode
+	*********************************************/
+	/*
+	public function wpb_book_shortcode( $atts ) {
+		$attributes = shortcode_atts( array(
+			'id' => '1',
+			'author_name' => 'Test',
+			'year' => '2020',
+			'category' => 'Test',
+			'tag' => 'Test',
+			'publisher' => 'Test'
+		), $atts );
+
+		$temp_value = get_book_meta( "33", "book_author_name" );
+		return $temp_value;
+	}
+
+	public function wpb_book_shortcode_caller() {
+		add_shortcode( 'BookSc', array( $this, 'wpb_book_shortcode' ) );
+	}
+	*/
+	/************************************************
+	*	This function is used to create dashboard widget
+	************************************************/
+
+	public function wpb_top_five_widget() {
+		wp_add_dashboard_widget( "top_five_book_widget",
+														 "Top 5 books",
+													 	 array( $this, "wpb_get_top_five_books" ) );
+	}
+
+	public function wpb_get_top_five_books() {
+		$args = [
+			'orderby' => 'count',
+			'order' => 'DESC',
+			'number' => 5,
+			'show_count' => 1,
+			'taxonomy' => 'book-category',
+			'style' => 'none',
+		];
+		wp_list_categories( $args );
 	}
 
 }

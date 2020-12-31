@@ -14,3 +14,12 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+
+<!-- Form for saving custom settings -->
+
+<h1>Books Menu</h1>
+<form method="post" action="options.php">
+  <?php settings_fields( 'books-setting-group' ); ?>
+  <?php do_settings_sections( 'book_menu' ); ?>
+  <?php submit_button(); ?>
+</form>
