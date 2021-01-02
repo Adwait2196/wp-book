@@ -165,8 +165,9 @@ class Wp_Book {
 		$this->loader->add_action( 'save_post_book', $plugin_admin, 'wpb_save_book_metabox_data', 10, 2 ); // Action to save meta box data to table
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wpb_cust_menu_page' ); // Action to create custom book menu
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'wpb_book_register_settings' ); // Action to register settings
-		//$this->loader->add_action( 'init', $plugin_admin, 'wpb_book_shortcode_caller' ); // Action to create custom shortcode
+		$this->loader->add_action( 'init', $plugin_admin, 'wpb_book_shortcode_caller' ); // Action to create custom shortcode
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'wpb_top_five_widget' ); // Action to create dashboard widget
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'cust_metabox_alert' );
 
 	}
 

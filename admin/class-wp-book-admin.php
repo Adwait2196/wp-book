@@ -241,15 +241,30 @@ class Wp_Book_Admin {
 			?>
 			<input name="author_name" id="author_name" type="text" value="<?php _e( $ath_name ); ?>" /><br/>
 			<label for="price">Price : </label><br/>
-			<input name="price" id="price" type="text"/><br/>
+			<?php
+				$pri = get_book_meta( $post->ID, "book_price" );
+			?>
+			<input name="price" id="price" type="text" value="<?php _e( $pri ); ?>"/><br/>
 			<label for="publisher">Publisher : </label><br/>
-			<input name="publisher" id="publisher" type="text"/><br/>
+			<?php
+				$pub = get_book_meta( $post->ID, "book_publisher" );
+			?>
+			<input name="publisher" id="publisher" type="text" value="<?php _e( $pub ); ?>"/><br/>
 			<label for="year">Year : </label><br/>
-			<input name="year" id="year" type="text" maxlength="4"/><br/>
+			<?php
+				$yr = get_book_meta( $post->ID, "book_year" );
+			?>
+			<input name="year" id="year" type="text" maxlength="4" value="<?php _e( $yr ); ?>"/><br/>
 			<label for="edition">Edition : </label><br/>
-			<input name="edition" id="edition" type="text"/><br/>
+			<?php
+				$edi = get_book_meta( $post->ID, "book_edition" );
+			?>
+			<input name="edition" id="edition" type="text" value="<?php _e( $edi ); ?>"/><br/>
 			<label for="ur_l">URL : </label><br/>
-			<input name="ur_l" id="ur_l" type="text"/><br/>
+			<?php
+				$uri = get_book_meta( $post->ID, "book_url" );
+			?>
+			<input name="ur_l" id="ur_l" type="text" value="<?php _e( $uri ); ?>"/><br/>
 		<?php
 	}
 
@@ -274,30 +289,34 @@ class Wp_Book_Admin {
 		$year = '';
 		$edition = '';
 		$url = '';
-		if( !empty( $_POST[ 'author_name' ]) ) {
+		if( !empty($_POST['author_name']) && !empty($_POST['price']) && !empty($_POST['publisher']) && !empty($_POST['year']) && !empty($_POST['edition']) && !empty($_POST['ur_l']) ) {
 			$auth_name = sanitize_text_field( $_POST[ 'author_name' ] );
-			update_book_meta( $post_id, "book_author_name", $auth_name );
+			$price = sanitize_text_field( $_POST[ 'price' ] );
+			$pub_name = sanitize_text_field( $_POST[ 'publisher' ] );
+			$year = sanitize_text_field( $_POST[ 'year' ] );
+			$edition = sanitize_text_field( $_POST[ 'edition' ] );
+			$url = sanitize_text_field( $_POST[ 'ur_l' ] );
+			$values_arr = array(
+				'book_author_name' => $auth_name,
+				'book_price' 			 => $price,
+				'book_publisher' 	 => $pub_name,
+				'book_year' 			 => $year,
+				'book_edition' 		 => $edition,
+				'book_url' 				 => $url
+			);
+			foreach( $values_arr as $key_val => $val ){
+				update_book_meta( $post_id, $key_val, $val );
+			}
 		}
-		if( !empty( $_POST[ 'price' ]) ) {
-			$auth_name = sanitize_text_field( $_POST[ 'price' ] );
-			update_book_meta( $post_id, "book_price", $auth_name );
+		else {
+			$this->cust_metabox_alert();
 		}
-		if( !empty( $_POST[ 'publisher' ]) ) {
-			$auth_name = sanitize_text_field( $_POST[ 'publisher' ] );
-			update_book_meta( $post_id, "book_publisher", $auth_name );
-		}
-		if( !empty( $_POST[ 'year' ]) ) {
-			$auth_name = sanitize_text_field( $_POST[ 'year' ] );
-			update_book_meta( $post_id, "book_year", $auth_name );
-		}
-		if( !empty( $_POST[ 'edition' ]) ) {
-			$auth_name = sanitize_text_field( $_POST[ 'edition' ] );
-			update_book_meta( $post_id, "book_edition", $auth_name );
-		}
-		if( !empty( $_POST[ 'ur_l' ]) ) {
-			$auth_name = sanitize_text_field( $_POST[ 'ur_l' ] );
-			update_book_meta( $post_id, "book_url", $auth_name );
-		}
+	}
+
+	public function cust_metabox_alert() {
+		echo '<div class="notice notice-error is-dismissible">
+             <p>Please fill all of the meta box fields to save them.</p>
+         </div>';
 	}
 
 	/********************************************************
@@ -328,8 +347,8 @@ class Wp_Book_Admin {
 
 	public function wpb_book_currency() {
 		echo '<select name="currency" id="currency">
-						<option value="Dollar">$ - dollar</option>
-						<option value="Rupees">Rs. - rupees</option>
+						<option value="$">USD</option>
+						<option value="Rs">Rupees</option>
 					</select>';
 	}
 
@@ -338,27 +357,103 @@ class Wp_Book_Admin {
 	}
 
 	/*********************************************
-	* These functions is used to create a shortcode
+	* This function is used to create a shortcode
 	*********************************************/
-	/*
+
 	public function wpb_book_shortcode( $atts ) {
-		$attributes = shortcode_atts( array(
-			'id' => '1',
-			'author_name' => 'Test',
-			'year' => '2020',
-			'category' => 'Test',
-			'tag' => 'Test',
-			'publisher' => 'Test'
+		$atts = shortcode_atts( array(
+			'book_id' 		=> '',
+			'author_name' => '',
+			'year' 				=> '',
+			'category' 		=> '',
+			'tag' 				=> '',
+			'publisher' 	=> ''
 		), $atts );
 
-		$temp_value = get_book_meta( "33", "book_author_name" );
-		return $temp_value;
+		$args = array(
+			'post_type' => 'book',
+			'post_status' => 'publish',
+			'author' => $atts['author_name']
+		);
+
+		if( $atts[ 'book_id' ] != '' ){
+			$args[ 'p' ] = $atts[ 'book_id' ];
+		}
+
+		if( $atts[ 'category' ] != '' ){
+			$args[ 'tax_query' ] = array(
+				array(
+					'taxonomy' => 'book-category',
+          'terms' => array( $atts[ 'category' ] ),
+          'field' => 'name',
+          'operator' => 'IN'
+				),
+			);
+		}
+
+		if( $atts[ 'tag' ] != '' ){
+			$args[ 'tax_query' ] = array(
+				array(
+					'taxonomy' => 'book-tag',
+          'terms' => array( $atts[ 'tag' ] ),
+          'field' => 'name',
+          'operator' => 'IN'
+				),
+			);
+		}
+
+		return $this->wpb_book_shortcode_function( $args );
 	}
 
 	public function wpb_book_shortcode_caller() {
 		add_shortcode( 'BookSc', array( $this, 'wpb_book_shortcode' ) );
 	}
-	*/
+
+	/****************************************************
+	* This function is used to display data with shortcode
+	****************************************************/
+
+	public function wpb_book_shortcode_function( $args ) {
+		global $wpb_settings;
+
+		$wpb_query = new WP_Query( $args );
+		if( $wpb_query->have_posts() ) {
+			while( $wpb_query->have_posts() ){
+				$wpb_query->the_post();
+
+				$wpb_info_author_name = get_metadata( 'book', get_the_id(), 'book_author_name' )[0];
+        $wpb_info_price = get_metadata( 'book', get_the_id(), 'book_price' )[0];
+				?>
+				<ul style="list-style: none;">
+					<?php
+					if( get_the_title() != '' ){
+						?>
+							<li>Book Title: <a href="<?php get_post_permalink(); ?>"><?php echo get_the_title(); ?></a></li>
+						<?php
+					}
+					if( $wpb_info_author_name != ''  ){
+          ?>
+          	<li>Author Name: <?php echo $wpb_info_author_name; ?></li>
+          <?php
+          }
+
+					if( $wpb_info_price != '' ){
+          ?>
+        		<li>Book Price: <?php echo $wpb_info_price; ?></li>
+          <?php
+          }
+					?>
+				</ul>
+				<?php
+			}
+		}
+		else {
+			?>
+				<h1>Sorry no Books Found</h1>
+			<?php
+		}
+	}
+
 	/************************************************
 	*	This function is used to create dashboard widget
 	************************************************/
