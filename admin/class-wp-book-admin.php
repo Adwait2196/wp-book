@@ -328,8 +328,8 @@ class Wp_Book_Admin {
 
 	public function wpb_book_currency() {
 		echo '<select name="currency" id="currency">
-						<option value="Dollar">$ - dollar</option>
-						<option value="Rupees">Rs. - rupees</option>
+						<option value="$">USD</option>
+						<option value="Rs">Rupees</option>
 					</select>';
 	}
 
@@ -338,27 +338,103 @@ class Wp_Book_Admin {
 	}
 
 	/*********************************************
-	* These functions is used to create a shortcode
+	* This function is used to create a shortcode
 	*********************************************/
-	/*
+
 	public function wpb_book_shortcode( $atts ) {
-		$attributes = shortcode_atts( array(
-			'id' => '1',
-			'author_name' => 'Test',
-			'year' => '2020',
-			'category' => 'Test',
-			'tag' => 'Test',
-			'publisher' => 'Test'
+		$atts = shortcode_atts( array(
+			'book_id' 		=> '',
+			'author_name' => '',
+			'year' 				=> '',
+			'category' 		=> '',
+			'tag' 				=> '',
+			'publisher' 	=> ''
 		), $atts );
 
-		$temp_value = get_book_meta( "33", "book_author_name" );
-		return $temp_value;
+		$args = array(
+			'post_type' => 'book',
+			'post_status' => 'publish',
+			'author' => $atts['author_name']
+		);
+
+		if( $atts[ 'book_id' ] != '' ){
+			$args[ 'p' ] = $atts[ 'book_id' ];
+		}
+
+		if( $atts[ 'category' ] != '' ){
+			$args[ 'tax_query' ] = array(
+				array(
+					'taxonomy' => 'book-category',
+          'terms' => array( $atts[ 'category' ] ),
+          'field' => 'name',
+          'operator' => 'IN'
+				),
+			);
+		}
+
+		if( $atts[ 'tag' ] != '' ){
+			$args[ 'tax_query' ] = array(
+				array(
+					'taxonomy' => 'book-tag',
+          'terms' => array( $atts[ 'tag' ] ),
+          'field' => 'name',
+          'operator' => 'IN'
+				),
+			);
+		}
+
+		return $this->wpb_book_shortcode_function( $args );
 	}
 
 	public function wpb_book_shortcode_caller() {
 		add_shortcode( 'BookSc', array( $this, 'wpb_book_shortcode' ) );
 	}
-	*/
+
+	/****************************************************
+	* This function is used to display data with shortcode
+	****************************************************/
+
+	public function wpb_book_shortcode_function( $args ) {
+		global $wpb_settings;
+
+		$wpb_query = new WP_Query( $args );
+		if( $wpb_query->have_posts() ) {
+			while( $wpb_query->have_posts() ){
+				$wpb_query->the_post();
+
+				$wpb_info_author_name = get_metadata( 'book', get_the_id(), 'book_author_name' )[0];
+        $wpb_info_price = get_metadata( 'book', get_the_id(), 'book_price' )[0];
+				?>
+				<ul>
+					<?php
+					if( get_the_title() != '' ){
+						?>
+							<li>Book Title: <a href="<?php get_post_permalink(); ?>"><?php echo get_the_title(); ?></a></li>
+						<?php
+					}
+					if( $wpb_info_author_name != ''  ){
+          ?>
+          	<li>Author Name: <?php echo $wpb_info_author_name; ?></li>
+          <?php
+          }
+
+					if( $wpb_info_price != '' ){
+          ?>
+        		<li>Book Price: <?php echo $wpb_info_price; ?></li>
+          <?php
+          }
+					?>
+				</ul>
+				<?php
+			}
+		}
+		else {
+			?>
+				<h1>Sorry no Books Found</h1>
+			<?php
+		}
+	}
+
 	/************************************************
 	*	This function is used to create dashboard widget
 	************************************************/
