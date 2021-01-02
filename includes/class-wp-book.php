@@ -167,6 +167,7 @@ class Wp_Book {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'wpb_book_register_settings' ); // Action to register settings
 		$this->loader->add_action( 'init', $plugin_admin, 'wpb_book_shortcode_caller' ); // Action to create custom shortcode
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'wpb_top_five_widget' ); // Action to create dashboard widget
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'cust_metabox_alert' );
 
 	}
 
