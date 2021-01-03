@@ -51,7 +51,12 @@ class Wp_Book_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->load_depend();
 
+	}
+
+	public function load_depend() {
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-cust-book-widg.php';
 	}
 
 	/**
@@ -98,6 +103,11 @@ class Wp_Book_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-book-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function wpb_cust_book_widget() {
+		$wpb_cat_class = new Wpb_Category_Widget();
+		register_widget( $wpb_cat_class );
 	}
 
 }

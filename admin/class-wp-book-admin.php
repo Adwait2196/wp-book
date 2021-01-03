@@ -361,6 +361,7 @@ class Wp_Book_Admin {
 	*********************************************/
 
 	public function wpb_book_shortcode( $atts ) {
+		//global $wpdb;
 		$atts = shortcode_atts( array(
 			'book_id' 		=> '',
 			'author_name' => '',
@@ -370,17 +371,29 @@ class Wp_Book_Admin {
 			'publisher' 	=> ''
 		), $atts );
 
+		/*if( $attributes[ 'book_id' ] != '' ){
+			$query_values = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->bookmeta WHERE book_id = %s", $attributes[ 'book_id' ] ), ARRAY_A );
+			var_dump ( $query_values[1]['meta_value'] );
+			echo "Hello";
+		}
+		else {
+				return;
+		}*/
+
 		$args = array(
 			'post_type' => 'book',
 			'post_status' => 'publish',
-			'author' => $atts['author_name']
 		);
 
-		if( $atts[ 'book_id' ] != '' ){
+		if( $atts[ 'author_name' ] != '' ) {
+			$args[ 'author_name' ] = $atts[ 'author_name' ];
+		}
+
+		if( $atts[ 'book_id' ] != '' ) {
 			$args[ 'p' ] = $atts[ 'book_id' ];
 		}
 
-		if( $atts[ 'category' ] != '' ){
+		if( $atts[ 'category' ] != '' ) {
 			$args[ 'tax_query' ] = array(
 				array(
 					'taxonomy' => 'book-category',
