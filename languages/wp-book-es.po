@@ -2,229 +2,228 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
-"PO-Revision-Date: 2021-01-04 11:19+0500\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-01-04 11:47+0530\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Eazy Po 0.9.5.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Language: es\n"
 
 #: admin/class-wp-book-admin.php:110
 msgctxt "Post Type General Name"
 msgid "Books"
-msgstr ""
+msgstr "Libros"
 
 #: admin/class-wp-book-admin.php:111
 msgctxt "Post Type Singular Name"
 msgid "Book"
-msgstr ""
+msgstr "Libro"
 
 #: admin/class-wp-book-admin.php:112
 msgid "Book"
-msgstr ""
+msgstr "Libro"
 
 #: admin/class-wp-book-admin.php:113
 msgid "All Books"
-msgstr ""
+msgstr "Todos los directorios"
 
 #: admin/class-wp-book-admin.php:114
 msgid "View Book"
-msgstr ""
+msgstr "Ver libro"
 
 #: admin/class-wp-book-admin.php:115
 msgid "Add New Book"
-msgstr ""
+msgstr "Agregar Nuevo Libro"
 
 #: admin/class-wp-book-admin.php:116
 msgid "Add New"
-msgstr ""
+msgstr "Añadir nuevo"
 
 #: admin/class-wp-book-admin.php:117
 msgid "Edit Book"
-msgstr ""
+msgstr "Editar libro"
 
 #: admin/class-wp-book-admin.php:118
 msgid "Update Book"
-msgstr ""
+msgstr "Actualizar Reserva"
 
 #: admin/class-wp-book-admin.php:119
 msgid "Search Book"
-msgstr ""
+msgstr "Buscar Reserva"
 
 #: admin/class-wp-book-admin.php:120
 msgid "Book Not Found"
-msgstr ""
+msgstr "Libro no encontrado"
 
 #: admin/class-wp-book-admin.php:121
 msgid "Book Not Found In Trash"
-msgstr ""
+msgstr "Libro no encontrado en la papelera"
 
 #: admin/class-wp-book-admin.php:154
 msgctxt "Taxonomy General Name"
 msgid "Book Categories"
-msgstr ""
+msgstr "Categorías de libros"
 
 #: admin/class-wp-book-admin.php:155
 msgctxt "Taxonomy Singular Name"
 msgid "Book Category"
-msgstr ""
+msgstr "Categoría del libro"
 
 #: admin/class-wp-book-admin.php:156
 msgid "Search For Book Category"
-msgstr ""
+msgstr "Buscar categoría de libro"
 
 #: admin/class-wp-book-admin.php:157
 msgid "All Book Categories"
-msgstr ""
+msgstr "Todas las categorías de libros"
 
 #: admin/class-wp-book-admin.php:158
 msgid "Parent Book Category"
-msgstr ""
+msgstr "Categoría de libro para padres"
 
 #: admin/class-wp-book-admin.php:159
 msgid "Parent Book Category:"
-msgstr ""
+msgstr "Categoría de libro para padres :"
 
 #: admin/class-wp-book-admin.php:160
 msgid "Edit Book Category"
-msgstr ""
+msgstr "Editar categoría de libro"
 
 #: admin/class-wp-book-admin.php:161
 msgid "Update Book Category"
-msgstr ""
+msgstr "Actualizar categoría de libro"
 
 #: admin/class-wp-book-admin.php:162
 msgid "Add New Book Category"
-msgstr ""
+msgstr "Agregar nueva categoría de libro"
 
 #: admin/class-wp-book-admin.php:163
 msgid "New Book Category"
-msgstr ""
+msgstr "Nueva categoría de libros"
 
 #: admin/class-wp-book-admin.php:164 public/class-wp-cust-book-widg.php:11
 msgid "Book Category"
-msgstr ""
+msgstr "Categoría del libro"
 
 #: admin/class-wp-book-admin.php:186
 msgctxt "Taxonomy General Name"
 msgid "Book Tags"
-msgstr ""
+msgstr "Etiquetas de libros"
 
 #: admin/class-wp-book-admin.php:187
 msgctxt "Taxonomy Singular Name"
 msgid "Book Tag"
-msgstr ""
+msgstr "Etiqueta de libro"
 
 #: admin/class-wp-book-admin.php:188
 msgid "Search For Book Tag"
-msgstr ""
+msgstr "Buscar etiqueta de libro"
 
 #: admin/class-wp-book-admin.php:189
 msgid "All Book Tags"
-msgstr ""
+msgstr "Todas las etiquetas de libros"
 
 #: admin/class-wp-book-admin.php:190
 msgid "Edit Book Tag"
-msgstr ""
+msgstr "Editar etiqueta de libro"
 
 #: admin/class-wp-book-admin.php:191
 msgid "Update Book Tag"
-msgstr ""
+msgstr "Actualizar etiqueta de libro"
 
 #: admin/class-wp-book-admin.php:192
 msgid "Add New Book Tag"
-msgstr ""
+msgstr "Agregar nueva etiqueta de libro"
 
 #: admin/class-wp-book-admin.php:193
 msgid "New Book Tag"
-msgstr ""
+msgstr "Etiqueta de libro nuevo"
 
 #: admin/class-wp-book-admin.php:194
 msgid "Book Tags"
-msgstr ""
+msgstr "Etiquetas de libros"
 
 #: admin/class-wp-book-admin.php:228
 msgid "Book Details"
-msgstr ""
+msgstr "Detalles del libro"
 
 #: admin/class-wp-book-admin.php:238 admin/class-wp-book-admin.php:449
 msgid "Author Name :"
-msgstr ""
+msgstr "Nombre del autor :"
 
 #: admin/class-wp-book-admin.php:243
 msgid "Price :"
-msgstr ""
+msgstr "Precio :"
 
 #: admin/class-wp-book-admin.php:248
 msgid "Publisher :"
-msgstr ""
+msgstr "Editor :"
 
 #: admin/class-wp-book-admin.php:253
 msgid "Year :"
-msgstr ""
+msgstr "Año :"
 
 #: admin/class-wp-book-admin.php:258
 msgid "Edition :"
-msgstr ""
+msgstr "Edición :"
 
 #: admin/class-wp-book-admin.php:263
 msgid "URL :"
-msgstr ""
+msgstr "URL :"
 
 #: admin/class-wp-book-admin.php:327
 msgid "Books Menu"
-msgstr ""
+msgstr "Menú de libros"
 
 #: admin/class-wp-book-admin.php:341
 msgid "Books setting section"
-msgstr ""
+msgstr "Selección de configuración de libros"
 
 #: admin/class-wp-book-admin.php:342
 msgid "Currency"
-msgstr ""
+msgstr "Moneda"
 
 #: admin/class-wp-book-admin.php:343
 msgid "Posts Per Page"
-msgstr ""
+msgstr "Publicaciones por página"
 
 #: admin/class-wp-book-admin.php:444
 msgid "Book Title :"
-msgstr ""
+msgstr "Titulo del libro :"
 
 #: admin/class-wp-book-admin.php:455
 msgid "Book Price :"
-msgstr ""
+msgstr "Precio del libro :"
 
 #: admin/class-wp-book-admin.php:465
 msgid "Sorry no Books Found"
-msgstr ""
+msgstr "Lo siento, no se encontró ningún libro"
 
 #: admin/class-wp-book-admin.php:476
 msgid "Top 5 books"
-msgstr ""
+msgstr "Los 5 mejores libros"
 
 #: public/class-wp-cust-book-widg.php:9
 msgid "Custom widget to display the books of selected category."
-msgstr ""
+msgstr "Widget personalizado para mostrar los libros de la categoría seleccionada."
 
 #: public/class-wp-cust-book-widg.php:31
 #, php-format
 msgid "View all posts in %s"
-msgstr ""
+msgstr "Ver todas las publicaciones en %s"
 
 #: public/class-wp-cust-book-widg.php:45
 msgid "Title:"
-msgstr ""
+msgstr "Título :"
 
 #: public/class-wp-cust-book-widg.php:49
 msgid "Choose the category to display"
-msgstr ""
+msgstr "Elija la categoría para mostrar"
