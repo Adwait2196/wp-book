@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
-"PO-Revision-Date: 2021-01-04 11:19+0500\n"
+"PO-Revision-Date: 2021-01-04 16:49+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -221,10 +221,10 @@ msgstr ""
 msgid "View all posts in %s"
 msgstr ""
 
-#: public/class-wp-cust-book-widg.php:45
+#: public/class-wp-cust-book-widg.php:52
 msgid "Title:"
 msgstr ""
 
-#: public/class-wp-cust-book-widg.php:49
+#: public/class-wp-cust-book-widg.php:56
 msgid "Choose the category to display"
 msgstr ""
