@@ -35,11 +35,18 @@ class Wpb_Category_Widget extends WP_Widget {
 	     <?php
     }
 
-    /** WP_Widget::form */
     function form( $instance ) {
 
-	    $title 		= esc_attr( $instance['title'] );
-	    $taxonomy	= esc_attr( $instance['taxonomy'] );
+      if( isset( $instance[ 'title' ]) ) {
+        $title 		= esc_attr( $instance['title'] );
+      } else {
+        $title = '';
+      }
+	    if( isset( $instance[ 'taxonomy' ]) ) {
+        $taxonomy	= esc_attr( $instance['taxonomy'] );
+      } else {
+        $taxonomy = '';
+      }
 	    ?>
 	    <p>
 	      <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
