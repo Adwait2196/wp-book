@@ -49,7 +49,7 @@ class Wpb_Category_Widget extends WP_Widget {
 		    <label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Choose the category to display'); ?></label>
 		    <select name="<?php echo $this->get_field_name('taxonomy'); ?>" id="<?php echo $this->get_field_id('taxonomy'); ?>" class="widefat"/>
 			    <?php
-			    $taxonomies = get_taxonomies(array('name' => 'book-category' ), 'names');
+			    $taxonomies = get_taxonomies(array( 'name' => 'book-category' ), 'names');
 			    foreach ($taxonomies as $option) {
 				    echo '<option id="' . $option . '"', $taxonomy == $option ? ' selected="selected"' : '', '>', $option, '</option>';
 			    }
